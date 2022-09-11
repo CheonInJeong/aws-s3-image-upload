@@ -1,19 +1,17 @@
 package com.example.awsimageupload.profile;
 
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 
+@Entity
+@Table(name="USER")
 public class UserProfile {
-    private UUID userProfileId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userProfileId;
     private String username;
     private String userProfileImageLink; //S3 key
-
-    public UserProfile(UUID userProfileId, String username, String userProfileImageLink) {
-        this.userProfileId = userProfileId;
-        this.username = username;
-        this.userProfileImageLink = userProfileImageLink;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -30,21 +28,15 @@ public class UserProfile {
         return Objects.hash(userProfileId, username, userProfileImageLink);
     }
 
-    public UUID getUserProfileId() {
+    public Long getUserProfileId() {
         return userProfileId;
     }
 
-    public void setUserProfileId(UUID userProfileId) {
-        this.userProfileId = userProfileId;
-    }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public Optional<String> getUserProfileImageLink() {
         return Optional.ofNullable(userProfileImageLink);
